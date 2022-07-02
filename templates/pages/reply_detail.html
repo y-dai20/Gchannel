@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% include "../snippets/sidebar.html" with pagename="reply_detail" %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <a href="/post/{{target_reply.post_id}}/" class="btn btn-outline-dark" role="button">&lt;&lt;前へ戻る</a>
+        </div>
+        <div class="row">
+            {% include "../snippets/reply.html" with reply=target_reply %}
+        </div>
+        {% for reply in reply_dicts %}
+            <div class="row">
+                {% include "../snippets/reply.html" with reply=reply %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %} 
+{% block main %}
+{% include "../snippets/sidebar.html" with pagename="index" %}
+
+<div class="content">
+  <div class="container">
+    {% for object in object_list %}
+    <div class="row">
+      <div class="col-8 border my-1">
+        {% include "../snippets/post.html" with object=object link=True%}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% include 'snippets/pagination.html' %}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% if object.username == user.username %}
+<a href="/profile/">{{object.username}}</a>
+{% else %}
+<a href="/user/{{object.username}}/">{{object.username}}</a> 
+{% endif %}
+{{object.created_at}}<br>
+{% if link %}
+    <div class="DivLink" onclick="location.href='/post/{{object.post_id}}/'">
+{% else %}
+    <div>
+{% endif %}
+    <div class="post-content">
+        <p class="post-title"><strong>{{object.title}}</strong></p>
+        {% if object.img_path %}
+        <img src="{{object.img_path}}" width="50%">
+        {% endif %}
+        <p class="post-text">{{object.text | linebreaks}}</p>
+    </div>
+</div>
+<div class="post-for-count">
+{% if user.is_authenticated %}
+    {% if object.agree_state %}
+        <button type="button" data-catid="{{object.post_id}}" id="agree{{object.post_id}}" class="agreebutton btn btn-success" value="agree">賛成</button>
+    {% else %}
+        <button type="button" data-catid="{{object.post_id}}" id="agree{{object.post_id}}" class="agreebutton btn btn-outline-success" value="agree">賛成</button>
+    {% endif %}
+    <span id="agree_count{{object.post_id}}">{{object.agree_count}}</span>
+
+    {% if object.agree_state == False %}
+        <button type="button" data-catid="{{object.post_id}}" id="disagree{{object.post_id}}" class="agreebutton btn btn-danger" value="disagree">反対</button>
+    {% else %}
+        <button type="button" data-catid="{{object.post_id}}" id="disagree{{object.post_id}}" class="agreebutton btn btn-outline-danger" value="disagree">反対</button>
+    {% endif %}
+    <span id="disagree_count{{object.post_id}}">{{object.disagree_count}}</span>
+
+    <a data-catid="{{object.post_id}}" class="favoritebutton">
+        {% if not object.favorite_state %}
+            <i class="fa-regular fa-star fa-lg" id="favorite{{object.post_id}}"></i>
+        {% else %}
+            <i class="solid-star fa-solid fa-star fa-lg" id="favorite{{object.post_id}}"></i>
+        {% endif %}
+    </a>
+
+    <a href="#" role="button" data-target="modal-reply-{{object.post_id}}" class="modal-open btn btn-secondary">返信</a>
+    {% include "snippets/modal_reply.html" with id=object.post_id base_action="/post/" %}
+    <span id="reply_count{{object.post_id}}">{{object.reply_count}}</span>
+
+    <div class="col-6 text-right">
+    {% if user.username == object.username %}
+        {% comment %} <a href="/post/edit/{{object.post_id}}" class="btn btn-outline-dark" role="button">編集</a> {% endcomment %}
+        <a href="/post/delete/{{object.post_id}}" class="btn btn-outline-dark" role="button">削除</a>
+    {% endif %}
+    </div>
+{% endif %}
+</div>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+ 
+{% block main %}
+<div class="content">
+    <div class="container">
+        {{target_user.username}}
+        {% if block_user %}
+            <a href="/block/user/{{target_user.username}}/" role="button" class="btn btn-secondary">ブロック解除</a>
+        {% else %}
+            {% if follow_user %}
+            <button type="button" data-catid="{{target_user.username}}" id="follow-{{target_user.username}}" class="follow-button btn btn-secondary">フォロー解除</button>
+            {% else %}
+                <button type="button" data-catid="{{target_user.username}}" id="follow-{{target_user.username}}" class="follow-button btn btn-outline-secondary">フォロー</button>
+            {% endif %}
+            <a href="/block/user/{{target_user.username}}/" role="button" class="btn btn-outline-secondary">ブロック</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

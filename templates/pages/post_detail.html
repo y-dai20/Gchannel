@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% include "../snippets/sidebar.html" with pagename="post_detail" %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <a href="/" class="btn btn-outline-dark" role="button">&lt;&lt;前へ戻る</a>
+        </div>
+        <div class="row">
+            <div class="col-8 border my-1">
+            {% include "../snippets/post.html" with object=object%}
+            </div>
+            <div class="col-4">
+                <div class="button-radio">
+                    <input class="radio-position search-cond" id="radio-Agree" type="radio" name="reply-position" value="Agree" checked>
+                    <label for="radio-Agree">賛成</label>
+                    <input class="radio-position search-cond" id="radio-Neutral" type="radio" name="reply-position" value="Neutral">
+                    <label for="radio-Neutral">中立</label>
+                    <input class="radio-position search-cond" id="radio-Disagree" type="radio" name="reply-position" value="Disagree">
+                    <label for="radio-Disagree">反対</label>
+                </div>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="すべて">すべて</button>
+                    <ul class="dropdown-menu">
+                        <li><button class="dropdown-item search-cond" value="すべて">すべて</button></li>
+                        <li><button class="dropdown-item search-cond" value="つぶやき">つぶやき</button></li>
+                        <li><button class="dropdown-item search-cond" value="根拠">根拠</button></li>
+                        <li><button class="dropdown-item search-cond" value="確認">確認</button></li>
+                        <li><button class="dropdown-item search-cond" value="要求">要求</button></li>
+                        <li><button class="dropdown-item search-cond" value="現状">現状</button></li>
+                        <li><button class="dropdown-item search-cond" value="その他">その他</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row reply-lists">
+            {% for reply in reply_dicts %}
+            {% include "../snippets/reply.html" with reply=reply link=True%}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

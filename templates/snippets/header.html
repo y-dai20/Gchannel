@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-md fixed-top">
+  <a class="navbar-brand" href="/">{{TITLE}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
+    {% if user.is_authenticated %}
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link modal-open" href="#" data-target="modal-post">投稿</a>
+          {% include "snippets/modal_post.html" %}
+        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/logout/">ログアウト</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/profile/">{{user.username}}</a>
+        </li>
+      </ul>
+    {% else %}
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/login/">ログイン</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/signup/">新規登録</a>
+        </li>
+      </ul>
+    {% endif %}
+  </div>
+</nav>

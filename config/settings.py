@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import environ
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -68,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'config.custom_context_processor.base',
             ],
         },
     },
@@ -131,3 +134,34 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TITLE="G-channel"
+
+# スキーマ＆ドメイン
+MY_URL = env.str('MY_URL')
+
+# カスタムユーザモデル
+AUTH_USER_MODEL = 'base.User'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/logout/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+# messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'rounded-0 alert alert-danger',
+    messages.WARNING: 'rounded-0 alert alert-warning',
+    messages.SUCCESS: 'rounded-0 alert alert-success',
+    messages.INFO: 'rounded-0 alert alert-info',
+    messages.DEBUG: 'rounded-0 alert alert-secondary',
+}
+
+# IDの長さ
+ID_LENGTH=22
+
+MEDIA_URL = '/media/'
+if DEBUG:
+    MEDIA_ROOT = BASE_DIR / 'media'
+else:
+    MEDIA_ROOT = f'/var/www/{BASE_DIR.name}/media'
+    
