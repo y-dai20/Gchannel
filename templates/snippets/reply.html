@@ -5,7 +5,7 @@
 {% elif reply.position == "Neutral" %}
     <div class="reply col-4 border my-1 position-{{replyjquey.position}} type-{{reply.type_id}}" reply-like-count="{{reply.like_count}}">
 {% else %}
-    <div class="reply col-4 border my-1 empty-reply" reply-like-count="0">
+    <div class="empty-reply col-4 border my-1" reply-like-count="0">
 {% endif %}
 
 {% if reply %}
@@ -19,7 +19,7 @@
             {{reply.text | linebreaks}}
         </div>
     {% if not reply.status %}
-        <a data-catid="{{reply.reply_id}}" class="likebutton" value="{{reply.status}}">
+        <a data-catid="{{reply.reply_id}}" class="likebutton">
             {% if reply.user_like %}
                 <i class="like-reply fa-solid fa-thumbs-up" id="like{{reply.reply_id}}"></i>
             {% else %}
@@ -31,5 +31,6 @@
         <a href="#" role="button" data-target="modal-reply-{{reply.reply_id}}" class="modal-open btn btn-secondary btn-sm">返信</a>
         {% include "snippets/modal_reply.html" with id=reply.reply_id base_action="/reply/" %}
     {% endif %}
+{% else %}
 {% endif %}
 </div>

@@ -47,8 +47,8 @@ $('.agreebutton').on('click', function(){
             $('#disagree' + String(data['post_id'])).removeClass("btn-danger").addClass("btn-outline-danger");
         }
         
-        $('#agree_count' + String(data['post_id'])).text(data['agree_count'])
-        $('#disagree_count' + String(data['post_id'])).text(data['disagree_count'])
+        $('#agree_count' + String(data['post_id'])).text(data['agree_count']);
+        $('#disagree_count' + String(data['post_id'])).text(data['disagree_count']);
     });
 });
 
@@ -60,29 +60,31 @@ $('.favoritebutton').on('click', function(){
         dataType:'json'  
     }).done(function (data) {
         if (data['is_favorite']) {
-            $('#favorite' + String(data['post_id'])).removeClass('fa-regular').addClass('solid-star fa-solid')
+            $('#favorite' + String(data['post_id'])).removeClass('fa-regular').addClass('solid-star fa-solid');
         } else {
-            $('#favorite' + String(data['post_id'])).removeClass('solid-star fa-solid').addClass('fa-regular')
+            $('#favorite' + String(data['post_id'])).removeClass('solid-star fa-solid').addClass('fa-regular');
         }
     });
 });
 
 $('.likebutton').on('click', function(){
     var id = $(this).attr('data-catid');
+    console.log("likebutton");
     $.ajax({
         url: '/reply/like/' + id + '/',
         type:'GET',
         data:{status: $(this).attr('value')},
         dataType:'json'  
     }).done(function (data) {
-        var tag = $('#like_count' + String(data['reply_id']))
-        var like_count = ParseInt(tag.text())
+        var tag = $('#like_count' + String(data['reply_id']));
+        var like_count = parseInt(tag.text());
+        
         if (data['is_like']) {
-            like_count = like_count + 1
+            like_count = like_count + 1;
         } else {
-            like_count = like_count - 1
+            like_count = like_count - 1;
         }
-        tag.text(like_count)
+        tag.text(like_count);
 
         $('#like' + String(data['reply_id'])).toggleClass('like-reply');
     });

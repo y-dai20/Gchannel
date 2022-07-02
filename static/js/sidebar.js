@@ -1,12 +1,13 @@
 $('.order-like').on('click', function(){
     $('.empty-reply').fadeOut();
     var result = $('.reply').sort(function(a,b){
-        var A = parseInt($(a).attr('reply-like-count'));
-        var B = parseInt($(b).attr('reply-like-count'));
-        console.log(A, B);
+        var A = parseInt($(a).find('.reply-like-count').text());
+        var B = parseInt($(b).find('.reply-like-count').text());
+
         return (A < B) ? 1 : (A > B) ? -1 : 0;
     });
-    $('.reply-lists').html(result);
+
+    $('.reply-lists').append(result);
 });
 
 $('.radio-position').click(function(){
@@ -28,6 +29,7 @@ $('.dropdown-item').click(function(){
 function search_position_type(position, type) {
     reply_type_id = ["つぶやき", "根拠", "確認", "要求", "現状", "その他"]
     
+    $('.empty-reply').fadeOut();
     $('.reply').fadeOut();
     var type_class = '';
     if ($.inArray(type, reply_type_id) != -1) {
