@@ -10,6 +10,18 @@ $('.order-like').on('click', function(){
     $('.reply-lists').append(result);
 });
 
+$('.order-time').on('click', function(){
+    $('.empty-reply').fadeOut();
+    var result = $('.reply').sort(function(a,b){
+        var A = ($(a).find('.reply-created-at').text());
+        var B = ($(b).find('.reply-created-at').text());
+
+        return (A < B) ? 1 : (A > B) ? -1 : 0;
+    });
+
+    $('.reply-lists').append(result);
+});
+
 $('.radio-position').click(function(){
     var type = $('.dropdown-toggle').text();
     var position = $(this).attr('value');

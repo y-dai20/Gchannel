@@ -15,7 +15,7 @@
         <div>
     {% endif %}
             <a href="/user/{{reply.username}}/">{{reply.username}}</a> 
-            {{reply.created_at}}<br>
+            <p class="reply-created-at">{{reply.created_at}}</p>
             {{reply.text | linebreaks}}
         </div>
     {% if not reply.status %}

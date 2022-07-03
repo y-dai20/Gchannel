@@ -43,12 +43,13 @@ nav.navbar a {
     position: fixed;
     height: 100%;
     overflow: auto;
+    color: white;
 }
 
 /* Sidebar links */
 .sidebar a {
     display: block;
-    color: rgb(255, 255, 255);
+    color: white;
     padding: 16px;
     text-decoration: none;
 }
