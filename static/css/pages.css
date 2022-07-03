@@ -94,13 +94,17 @@ form .error {
 
 .button-radio label {
     width: 30%;
-    height: 50px;
+    height: 40px;
     display: inline-block; 
     color: #ddd;
     border: 1px solid #ddd;
     text-align: center;
     vertical-align: middle;
-    padding-top: 10px;
+}
+
+#radio-all {
+    width: 90%;
+    height: 30px;
 }
 
 .button-radio input[type="radio"]:checked + label {

@@ -47,5 +47,11 @@ function search_position_type(position, type) {
     if ($.inArray(type, reply_type_id) != -1) {
         type_class = '.type-' + String($.inArray(type, reply_type_id));
     }
-    $('.position-' + position + type_class).fadeIn();  
+
+    var position_class = '';
+    if (position != 'all') {
+        position_class = '.position-' + position;  
+    }
+
+    $('.reply' + position_class + type_class).fadeIn();  
 }
