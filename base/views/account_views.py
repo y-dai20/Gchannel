@@ -49,19 +49,5 @@ class UserDetailView(TemplateView):
 
         return context
 
-# class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Profile
-#     template_name = 'pages/profile.html'
-#     fields = ('name', 'zipcode', 'prefecture',
-#               'city', 'address1', 'address2', 'tel')
-#     success_url = '/profile/'
-
-#     def get_object(self):
-#         # URL変数ではなく、現在のユーザーから直接pkを取得
-#         self.kwargs['pk'] = self.request.user.pk
-#         return super().get_object()
-    
-#     def form_valid(self, form):
-#         messages.success(self.request, '保存しました．')
-#         return super().form_valid(form)
- 
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    pass

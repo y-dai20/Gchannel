@@ -49,7 +49,6 @@ class IndexListView(ListView):
             json_htmls['a'] = str(render(request, 'snippets/post.html'))
 
         return JsonResponse(json_htmls)
-        # return JsonResponse({"a":1})
 
     def get_queryset(self):
         posts = Post.objects.filter(is_deleted=False).order_by('-created_at')

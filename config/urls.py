@@ -28,8 +28,10 @@ urlpatterns = [
     path('login/', views.LoginView.as_view()),
     path('logout/', LogoutView.as_view()),
     path('signup/', views.SignUpView.as_view()),
-    # path('profile/', views.ProfileUpdateView.as_view()),
+    path('profile/', views.ProfileUpdateView.as_view()),
     path('user/<str:name>/', views.UserDetailView.as_view()),
+    # Room
+    path('room/<str:name>/', views.ShowRoomView.as_view()),
     # Follow
     path('follow/user/<str:name>/', views.FollowView.as_view()),
     path('block/user/<str:name>/', views.BlockView.as_view()),

@@ -4,3 +4,4 @@ from .follow_views import *
 from .reply_views import *
 from .index_views import *
 from .general_views import *
+from .room_views import *

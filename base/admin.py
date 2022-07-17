@@ -1,10 +1,7 @@
 from base.forms import UserCreationForm
 from django.contrib import admin
-from base.models import User, Post, ReplyPost, BlockUser, FollowUser, FavoritePost, AgreePost, LikeReply
-from django.contrib.auth.models import Group
+from base.models import *
 from django.contrib.auth.admin import UserAdmin
-
-from base.models.reply_models import ReplyReply
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
@@ -33,4 +30,4 @@ admin.site.register(ReplyReply)
 admin.site.register(ReplyPost)
 admin.site.register(Post)
 admin.site.register(User, CustomUserAdmin)
-admin.site.unregister(Group)
+admin.site.register(Room)
