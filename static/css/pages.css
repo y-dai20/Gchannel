@@ -15,6 +15,10 @@ i.like-reply {
     color: blue;
 }
 
+.dropdown-menu {
+    background-color: #3b3a3a;
+}
+
 .post-content {
     background-color: rgb(244, 238, 235);
 }

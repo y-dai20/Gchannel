@@ -2,6 +2,7 @@ from dataclasses import field
 from django import forms
 from django.contrib.auth import get_user_model
 from base.models import Post, ReplyPost, ReplyReply
+from base.models.room_models import Room
  
  
 class UserCreationForm(forms.ModelForm):
@@ -40,5 +41,8 @@ class ReplyReplyForm(forms.ModelForm):
         model = ReplyReply
         fields = ('text',)
 
+class CreateRoomForm(forms.ModelForm):
 
-    
+    class Meta:
+        model = Room
+        fields = ('title', 'subtitle', 'img')

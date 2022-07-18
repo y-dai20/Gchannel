@@ -14,10 +14,22 @@
       </ul>
 
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/room/{{user.username}}/">My Room</a>
-        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            My Room
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item modal-open" data-target="modal-room" href="#">Room作成</a>
+            {% include "snippets/modal_room.html" %}
+            <div class="dropdown-divider"></div>
+            {% for myroom in myrooms %}
+              <a class="dropdown-item" href="/room/{{myroom.id}}/">{{myroom.title}}</a>
+            {% endfor %}
+          </div>
+        </li>  
       </ul>
+
+
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="/logout/">ログアウト</a>

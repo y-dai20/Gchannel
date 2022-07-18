@@ -31,7 +31,8 @@ urlpatterns = [
     path('profile/', views.ProfileUpdateView.as_view()),
     path('user/<str:name>/', views.UserDetailView.as_view()),
     # Room
-    path('room/<str:name>/', views.ShowRoomView.as_view()),
+    path('room/<str:pk>/', views.ShowRoomView.as_view()),
+    path('createroom/', views.CreateRoomView.as_view()),
     # Follow
     path('follow/user/<str:name>/', views.FollowView.as_view()),
     path('block/user/<str:name>/', views.BlockView.as_view()),

@@ -2,7 +2,7 @@ from http.client import HTTPResponse
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
-from base.models import Post, ReplyPost, AgreePost, LikeReply, FavoritePost
+from base.models import *
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
@@ -39,6 +39,7 @@ class IndexListView(ListView):
     template_name = 'pages/index.html'
     model = Post
     paginate_by = 10
+    room = None
 
     def post(self, request, *args, **kwargs):
         start_idx = int(request.POST.get('start_idx'))
@@ -51,13 +52,21 @@ class IndexListView(ListView):
         return JsonResponse(json_htmls)
 
     def get_queryset(self):
-        posts = Post.objects.filter(is_deleted=False).order_by('-created_at')
+        posts = Post.objects.filter(is_deleted=False, room=self.room).order_by('-created_at')
         
         queryset = []
         for post in posts:
             queryset.append(get_post_index_item(post))
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        rooms = Room.objects.filter(admin_user=self.request.user)
+        context["myrooms"] = rooms
+
+        return context
 
 class LargePostIndexListView(IndexListView):
     def get_queryset(self):
