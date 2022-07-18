@@ -9,7 +9,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link modal-open" href="#" data-target="modal-post">投稿</a>
-          {% include "snippets/modal_post.html" %}
+          {% include "snippets/modal_post.html" with room=room_id %}
         </li>
       </ul>
 

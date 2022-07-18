@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
-from base.models import Post, ReplyPost, AgreePost, LikeReply, FavoritePost, User
+from base.models import *
 from base.forms import PostForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,6 +19,10 @@ class PostView(LoginRequiredMixin, CreateView):
         if form.is_valid():
             post = form.save(commit=False)
             post.user = self.request.user
+            room = request.POST.get('room')
+            if len(room) != 0:
+                post.room = get_object_or_404(Room, id=room)
+
             post.save()
 
             messages.success(self.request, '投稿しました．')

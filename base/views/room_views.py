@@ -17,6 +17,7 @@ class ShowRoomView(IndexListView):
         room = get_object_or_404(Room, pk=self.kwargs['pk'])
         context["title"] = room.title
         context["subtitle"] = room.subtitle
+        context["room_id"] = room.pk
 
         return context
 
