@@ -6,12 +6,15 @@
 
   <div class="collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
     {% if user.is_authenticated %}
+
+      {% if is_allowed %}
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link modal-open" href="#" data-target="modal-post">投稿</a>
           {% include "snippets/modal_post.html" with room=room_id %}
         </li>
       </ul>
+      {% endif %}
 
       <ul class="navbar-nav">
         <li class="nav-item dropdown">

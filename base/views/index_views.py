@@ -65,6 +65,7 @@ class IndexListView(ListView):
 
         rooms = Room.objects.filter(admin_user=self.request.user)
         context["myrooms"] = rooms
+        context["is_allowed"] = True
 
         return context
 

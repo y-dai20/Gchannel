@@ -32,6 +32,7 @@ urlpatterns = [
     path('user/<str:name>/', views.UserDetailView.as_view()),
     # Room
     path('room/<str:pk>/', views.ShowRoomView.as_view()),
+    path('join/room/<str:pk>/', views.JoinRoomView.as_view()),
     path('createroom/', views.CreateRoomView.as_view()),
     # Follow
     path('follow/user/<str:name>/', views.FollowView.as_view()),

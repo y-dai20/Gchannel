@@ -7,7 +7,7 @@
     {% for object in object_list %}
     <div class="row">
       <div class="col-8 border my-1">
-        {% include "../snippets/post.html" with object=object link=True%}
+        {% include "../snippets/post.html" with object=object link=True is_allowed=True %}
       </div>
     </div>
     {% endfor %}

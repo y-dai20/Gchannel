@@ -5,12 +5,21 @@
 
 <div class="content">
     <div class="container">
-         <h1>{{title}}</h1>
-         <h3>{{subtitle}}</h3>
+        <div class="row">
+            <div class="col-8">
+                <h1>{{title}}</h1>
+                <h3>{{subtitle}}</h3>
+            </div>
+            <div class="col-4">
+                {% if is_allowed == None %}
+                    <a href="/join/room/{{room_id}}/" role="button" type="button" class="btn btn-secondary" value="">参加</a>
+                {% endif %}
+            </div>
+        </div>
          {% for object in object_list %}
             <div class="row">
             <div class="col-8 border my-1">
-                {% include "../snippets/post.html" with object=object link=True%}
+                {% include "../snippets/post.html" with object=object link=True is_allowed=is_allowed%}
             </div>
             </div>
         {% endfor %}

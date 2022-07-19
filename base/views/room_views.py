@@ -1,3 +1,4 @@
+from mimetypes import guess_all_extensions
 from django.views.generic import ListView, CreateView, DetailView
 from base.models import Room
 from base.models import *
@@ -18,6 +19,12 @@ class ShowRoomView(IndexListView):
         context["title"] = room.title
         context["subtitle"] = room.subtitle
         context["room_id"] = room.pk
+
+        room_guest = RoomGuest.objects.filter(room=room, guest=self.request.user)
+        if room_guest.exists():
+            context['is_allowed'] = room_guest[0].is_allowed
+        else:
+            context['is_allowed'] = None
 
         return context
 
@@ -44,3 +51,16 @@ class CreateRoomView(LoginRequiredMixin, CreateView):
     def form_invalid(self, form):
         messages.error(self.request, 'Roomの作成に失敗しました．')
         return super().form_invalid(form)
+
+class JoinRoomView(LoginRequiredMixin, CreateView):
+    model = RoomGuest
+
+    def get(self, request, *args, **kwargs):
+        guest_room = RoomGuest.objects.filter(guest=self.request.user, room=self.kwargs['pk'])
+        if guest_room.exists():
+            return super().get(request, *args, **kwargs)
+
+        guest_room.create(guest=self.request.user, room=Room.objects.get(id=self.kwargs['pk']))
+
+        return redirect(request.META['HTTP_REFERER'])
+
