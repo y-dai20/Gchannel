@@ -1,27 +1,23 @@
-from contextlib import redirect_stderr
-from urllib import request
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from django.views.generic import CreateView, UpdateView, DetailView, TemplateView
-from base.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from base.models.account_models import User
 from django.conf import settings
 from django.shortcuts import redirect, get_object_or_404
 
-from base.models import FollowUser, BlockUser
-# from django.db.models.loading import cache as model_cache
+from base.forms import UserCreationForm
+from base.models import FollowUser, BlockUser, User
 
 
 class LoginView(LoginView):
     template_name = 'pages/login.html'
 
     def form_valid(self, form):
-        messages.success(self.request, 'ログインしました。')
+        messages.success(self.request, 'ログインしました．')
         return super().form_valid(form)
  
     def form_invalid(self, form):
-        messages.error(self.request, 'エラーでログインできません。')
+        messages.error(self.request, 'ログインに失敗しました．')
         return super().form_invalid(form)
 
 class SignUpView(CreateView):
@@ -30,7 +26,7 @@ class SignUpView(CreateView):
     template_name = 'pages/signup.html'
  
     def form_valid(self, form):
-        messages.success(self.request, '新規登録が完了しました。続けてログインしてください。')
+        messages.success(self.request, '新規登録が完了しました．続けてログインしてください．')
         return super().form_valid(form)
 
 class UserDetailView(TemplateView):

@@ -1,16 +1,14 @@
-from http.client import HTTPResponse
-from urllib import request
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
-from base.models import Post, ReplyPost, AgreePost, LikeReply, FavoritePost
-from base.forms import ReplyReplyForm, ReplyPostForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.http import JsonResponse
 
-from base.models.reply_models import ReplyReply
+from base.models import Post, ReplyPost, AgreePost, LikeReply, ReplyReply
+from base.forms import ReplyReplyForm, ReplyPostForm
+
 
 class LikeReplyView(LoginRequiredMixin, DetailView):
     model = LikeReply

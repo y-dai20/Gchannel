@@ -1,14 +1,11 @@
-from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
-from base.models import FollowUser, User
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
-from django.conf import settings
-from base.models import follow_models
-from base.models.follow_models import BlockUser
 from django.http import JsonResponse
+
+from base.models import FollowUser, User, BlockUser
+
 
 class FollowView(LoginRequiredMixin, DetailView):
     model = FollowUser
@@ -27,7 +24,6 @@ class FollowView(LoginRequiredMixin, DetailView):
             is_done = False
         else:
             follow.create(user=request.user, followed_user=follow_user)
-
 
         data = {
             "username":kwargs['name'],

@@ -1,12 +1,11 @@
-from mimetypes import guess_all_extensions
 from django.views.generic import ListView, CreateView, DetailView
-from base.models import Room
-from base.models import *
-from base.views.index_views import IndexListView
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from base.forms import CreateRoomForm
 from django.contrib import messages
+
+from base.models import Room, RoomGuest
+from base.views.index_views import IndexListView
+from base.forms import CreateRoomForm
 
 class ShowRoomView(IndexListView):
     template_name = 'pages/room.html'

@@ -1,14 +1,16 @@
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
-from base.models import *
-from base.forms import PostForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.http import JsonResponse
+
+from base.models import Room, Post, ReplyPost, LikeReply, AgreePost, FavoritePost
+from base.forms import PostForm
 from base.views.index_views import get_post_index_item
 from base.views.functions import get_reply_type_id
+
 
 class PostView(LoginRequiredMixin, CreateView):
     form_class = PostForm
@@ -29,10 +31,6 @@ class PostView(LoginRequiredMixin, CreateView):
             return redirect(request.META['HTTP_REFERER'])
         
         return super().post(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        messages.success(self.request, '投稿しました．')
-        return super().form_valid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, '投稿に失敗しました．')

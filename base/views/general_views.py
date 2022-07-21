@@ -1,6 +1,8 @@
 from django.views.generic import View
-from base.views.functions import get_reply_type_id
 from django.http import JsonResponse
+
+from base.views.functions import get_reply_type_id
+
 
 class GetReplyTypeIdView(View):
     def get(self, request, *args, **wargs):
