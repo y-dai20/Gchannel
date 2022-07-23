@@ -31,7 +31,19 @@
           </div>
         </li>  
       </ul>
-
+      
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Other Room
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for room_user in room_users %}
+              <a class="dropdown-item" href="/room/{{room_user.room.id}}/">{{room_user.room.title}} by {{room_user.room.admin_user}}</a>
+            {% endfor %}
+          </div>
+        </li>  
+      </ul>
 
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -40,7 +52,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/profile/">{{user.username}}</a>
+          <a class="nav-link" href="/profile/{{user.username}}/">{{user.username}}</a>
         </li>
       </ul>
     {% else %}

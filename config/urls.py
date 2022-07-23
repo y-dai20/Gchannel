@@ -28,11 +28,12 @@ urlpatterns = [
     path('login/', views.LoginView.as_view()),
     path('logout/', LogoutView.as_view()),
     path('signup/', views.SignUpView.as_view()),
-    path('profile/', views.ProfileUpdateView.as_view()),
+    path('profile/<str:name>/', views.UserProfileView.as_view()),
     path('user/<str:name>/', views.UserDetailView.as_view()),
     # Room
     path('room/<str:pk>/', views.ShowRoomView.as_view()),
     path('join/room/<str:pk>/', views.JoinRoomView.as_view()),
+    path('accept/<str:room>/<str:guest>/', views.AcceptRoomGuestView.as_view()),
     path('createroom/', views.CreateRoomView.as_view()),
     # Follow
     path('follow/user/<str:name>/', views.FollowView.as_view()),

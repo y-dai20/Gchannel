@@ -6,7 +6,7 @@ from django.db.models import Count
 from django.conf import settings
 from django.http import JsonResponse
 
-from base.models import AgreePost, FavoritePost, ReplyPost, Post, Room
+from base.models import AgreePost, FavoritePost, ReplyPost, Post, Room, RoomUser
 
 
 def get_post_index_item(post):
@@ -41,15 +41,15 @@ class IndexListView(ListView):
     paginate_by = 10
     room = None
 
-    def post(self, request, *args, **kwargs):
-        start_idx = int(request.POST.get('start_idx'))
-        posts = Post.objects.filter(is_deleted=False).order_by('-created_at')[start_idx:start_idx + 10]
+    # def post(self, request, *args, **kwargs):
+    #     start_idx = int(request.POST.get('start_idx'))
+    #     posts = Post.objects.filter(is_deleted=False).order_by('-created_at')[start_idx:start_idx + 10]
         
-        json_htmls = {}
-        for i, post in enumerate(posts):
-            json_htmls['a'] = str(render(request, 'snippets/post.html'))
+    #     json_htmls = {}
+    #     for i, post in enumerate(posts):
+    #         json_htmls['a'] = str(render(request, 'snippets/post.html'))
 
-        return JsonResponse(json_htmls)
+    #     return JsonResponse(json_htmls)
 
     def get_queryset(self):
         posts = Post.objects.filter(is_deleted=False, room=self.room).order_by('-created_at')
@@ -63,9 +63,15 @@ class IndexListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        rooms = Room.objects.filter(admin_user=self.request.user)
-        context["myrooms"] = rooms
-        context["is_allowed"] = True
+        try:
+            rooms = Room.objects.filter(admin_user=self.request.user)
+            context["myrooms"] = rooms
+            context["is_allowed"] = True
+
+            room_users = RoomUser.objects.filter(user=self.request.user, is_deleted=False)
+            context["room_users"] = room_users
+        except Exception as e:
+            pass
 
         return context
 

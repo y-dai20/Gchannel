@@ -15,7 +15,7 @@ class CustomUserAdmin(UserAdmin):
     filter_horizontal = ()
  
     add_fieldsets = (
-        (None, {'fields': ('username', 'email', 'is_active',)}),
+        (None, {'fields': ('username', 'email', 'password','is_active',)}),
     )
  
     add_form = UserCreationForm
@@ -32,3 +32,4 @@ admin.site.register(Post)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Room)
 admin.site.register(RoomGuest)
+admin.site.register(RoomUser)

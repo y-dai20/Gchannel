@@ -6,7 +6,7 @@ from django.conf import settings
 from django.shortcuts import redirect, get_object_or_404
 
 from base.forms import UserCreationForm
-from base.models import FollowUser, BlockUser, User
+from base.models import FollowUser, BlockUser, User, Room, RoomGuest
 
 
 class LoginView(LoginView):
@@ -45,5 +45,26 @@ class UserDetailView(TemplateView):
 
         return context
 
-class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-    pass
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/profile.html'
+    model = settings.AUTH_USER_MODEL
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # ここから変えたい
+        user = User.objects.get(username=self.kwargs['name'])
+        if self.request.user != user:
+            return redirect('/')
+
+
+        accept_room_guests = {}
+        rooms = Room.objects.filter(admin_user=self.request.user)
+        for room in rooms:
+            room_guests = RoomGuest.objects.filter(room=room, is_allowed=False)
+            if room_guests.exists():
+                accept_room_guests[room.title] = room_guests
+        
+        context['accept_room_guests'] = accept_room_guests
+
+        return context

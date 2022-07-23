@@ -18,11 +18,24 @@ class RoomGuest(models.Model):
     id = models.CharField(default=create_id, primary_key=True, max_length=settings.ID_LENGTH, editable=False)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     guest = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    is_allowed = models.BooleanField(default=True)
+    is_allowed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['room', 'guest'], name="unique_stock")
+            models.UniqueConstraint(fields=['room', 'guest'], name="unique_room_guest")
+        ]
+
+class RoomUser(models.Model):
+    id = models.CharField(default=create_id, primary_key=True, max_length=settings.ID_LENGTH, editable=False)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    is_deleted = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['room', 'user'], name="unique_room_user")
         ]

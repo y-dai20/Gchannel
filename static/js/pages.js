@@ -126,3 +126,15 @@ $('.follow-button').on('click', function(){
         $('#follow-' + data['username']).text(data["text"])
     });
 });
+
+$('.accept-button').on('click', function(){
+    var room_user = $(this).attr('data-catid');
+    $.ajax({
+        url: '/accept/' + room_user + '/',
+        type:'GET',
+        data:{is_deleted: $(this).attr('is-deleted')},
+        dataType:'json'
+    }).done(function (data) {
+        $('#' + data['room'] + '-' + data['guest']).fadeOut();
+    });
+});

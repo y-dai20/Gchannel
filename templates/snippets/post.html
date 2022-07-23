@@ -1,5 +1,5 @@
 {% if object.username == user.username %}
-<a href="/profile/">{{object.username}}</a>
+<a href="/profile/{{user.username}}/">{{object.username}}</a>
 {% else %}
 <a href="/user/{{object.username}}/">{{object.username}}</a> 
 {% endif %}
